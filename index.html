@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Atelier de carrosserie et mécanique automobile spécialisé dans l'entretien, la réparation, la restauration et la peinture de véhicules.">
+  <title>Accueil - Atelier de Carrosserie et Mécanique</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #e74c3c;
+      --accent-color: #3498db;
+      --text-color: #2c3e50;
+      --light-bg: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .bg-custom {
+      background: linear-gradient(135deg, var(--primary-color), #34495e);
+    }
+
+    .navbar {
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: white !important;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+    }
+
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover:after {
+      width: 100%;
+      left: 0;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary-color) !important;
+      transform: translateY(-2px);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 24px;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 0 15px;
+    }
+
+    .gallery-link {
+      background-color: var(--secondary-color);
+      border-radius: 25px;
+      padding: 8px 20px !important;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-link:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    .gallery-link:after {
+      display: none;
+    }
+
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--secondary-color);
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      border-radius: 15px;
+      background-color: var(--light-bg);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .service-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .service-item img {
+      width: 250px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-right: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .service-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .material-section img {
+      width: 180px;
+      height: auto;
+      margin-right: 2rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .material-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      border-radius: 15px;
+      background-color: var(--light-bg);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .material-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .contact-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+
+    .contact-card .card-body {
+      padding: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info i {
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+      margin-right: 1rem;
+    }
+
+    .footer {
+      background: linear-gradient(135deg, var(--primary-color), #34495e);
+      padding: 3rem 0;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.1);
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- En-tête -->
+  <header  class="bg-custom text-white py-4">
+    <div class="container">
+      <h1 style="color: #e74c3c; cursor: pointer;" class="text-center animate__animated animate__fadeIn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Check up Carrosserie</h1>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid justify-content-center">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="#accueil">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="#equipement">Équipement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="#contact">Contact</a>
+            </li>
+            <li class="nav-divider"></li>
+            <li class="nav-item">
+              <a class="nav-link gallery-link" href="gallery.html">Galerie</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenu principal -->
+  <main class="container my-5">
+    <!-- Section Bienvenue -->
+    <section id="accueil" class="text-center mb-5 animate-fade-in">
+      <h2 class="section-title">Bienvenue dans notre atelier</h2>
+      <p class="lead">
+        Nous sommes spécialisés dans la carrosserie et la mécanique automobile depuis plus de <strong>15 ans</strong>.
+        Notre expertise couvre l'entretien, la réparation, la restauration et la peinture de tous types de véhicules.
+      </p>
+    </section>
+
+    <!-- Section Services -->
+    <section id="services" class="mb-5 animate-fade-in">
+      <h2 class="section-title text-center">Nos Services</h2>
+      <div class="service-item">
+        <img src="expertise.webp" alt="Expertise">
+        <div>
+          <h3>Expertise pour toutes les réparations </h3>
+          <p>Notre experience nous permet de vous proposer une expertise rapide et efficace pour votre véhicule.</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="carosserie.webp" alt="Réparation carrosserie">
+        <div>
+          <h3>Réparation de carrosserie</h3>
+          <p>Réparation de tous types de dommages sur la carrosserie de votre véhicule.</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="peinture.webp" alt="Peinture automobile">
+        <div>
+          <h3>Peinture professionnelle</h3>
+          <p>Service de peinture haute qualité avec finition impeccable.</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="mecanique.webp" alt="Réparation mécanique">
+        <div>
+          <h3>Réparation mécanique </h3>
+          <p>Service de réparation mécanique de tous types de véhicules.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Section Notre Matériel -->
+    <section id="equipement" class="mb-5 animate-fade-in">
+      <h2 class="section-title text-center">Notre Matériel</h2>
+      <div class="material-section">
+        <!-- Pont élévateur -->
+        <div class="material-item">
+          <img src="pont.webp" alt="Pont élévateur pour accès facile et sécurisé au véhicule">
+          <div>
+            <h3>Pont élévateur</h3>
+            <p>Pour un accès facile et sécurisé à toutes les parties du véhicule.</p>
+          </div>
+        </div>
+
+        <!-- Matériel de soudure -->
+        <div class="material-item">
+          <img src="soudure.webp" alt="Matériel de soudure pour réparations précises">
+          <div>
+            <h3>Matériel de soudure</h3>
+            <p>Pour des réparations précises et durables.</p>
+          </div>
+        </div>
+
+        <!-- Four à carrosserie -->
+        <div class="material-item">
+          <img src="four.webp" alt="Four à carrosserie pour séchage optimal de la peinture">
+          <div>
+            <h3>Cabine de Peinture </h3>
+            <p>Pour un séchage optimal de la peinture.</p>
+          </div>
+        </div>
+
+        <!-- Girafe (élévateur de moteur) -->
+        <div class="material-item">
+          <img src="girafe.webp" alt="Girafe élévateur de moteur pour manipulation sécurisée">
+          <div>
+            <h3>Girafe (élévateur de moteur)</h3>
+            <p>Pour manipuler les moteurs en toute sécurité.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="mb-5 animate-fade-in">
+      <h2 class="section-title text-center">Contactez-nous</h2>
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="contact-card card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 class="mb-4">Nos coordonnées</h3>
+                  <div class="contact-info">
+                    <i class="bi bi-geo-alt"></i>
+                    <p class="mb-0">11 Rue du 08 Novembre , El Mouradia , Alger</p>
+                  </div>
+                  <div class="contact-info">
+                    <i class="bi bi-telephone"></i>
+                    <p class="mb-0">+213 0550 43 66 80</p>
+                  </div>
+                  <div class="contact-info">
+                    <i class="bi bi-envelope"></i>
+                    <p class="mb-0">check.up.carrosserie2012@gmail.com</p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h3 class="mb-4">Horaires d'ouverture</h3>
+                  <div class="contact-info">
+                    <i class="bi bi-clock"></i>
+                    <div>
+                      <p class="mb-1">Dimanche - Jeudi : 8h - 16h00</p>
+                      <p class="mb-0">Vendredi - Samedi : Fermé</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="footer text-white">
+    <div class="container text-center">
+      <p>&copy; 2024 Check up Carrosserie - Tous droits réservés</p>
+      <div class="social-links mt-3">
+        <a href="https://www.facebook.com/share/12F6A1GydwA/?mibextid=wwXIfr" class="text-white" target="_blank">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/check_up_carosserie?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="text-white" target="_blank">
+          <i class="bi bi-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie - Check up Carrosserie</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #e74c3c;
+      --accent-color: #3498db;
+      --text-color: #2c3e50;
+      --light-bg: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .bg-custom {
+      background: linear-gradient(135deg, var(--primary-color), #34495e);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .section-title {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--secondary-color);
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: white !important;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+    }
+
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: var(--secondary-color);
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover:after {
+      width: 100%;
+      left: 0;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary-color) !important;
+      transform: translateY(-2px);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 24px;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 0 15px;
+    }
+
+    .gallery-link {
+      background-color: var(--secondary-color);
+      border-radius: 25px;
+      padding: 8px 20px !important;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-link:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    .gallery-link:after {
+      display: none;
+    }
+
+    .gallery-item {
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    /* Default image style */
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+      background-color: #f8f9fa;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    /* Specific styles for zoomed images */
+    #img4 img, #img5 img {
+      object-fit: cover;
+      height: 300px;
+      
+    }
+    /* Slightly zoomed images */
+    #apres1 img, #apres2 img, #apres3 img{
+      object-fit: cover;
+      height: 275px;
+    }
+
+     #mini1av img, #mini2av img, #avant img {
+      object-fit: cover;
+      height: 275px;
+      width: 275px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+
+    .gallery-caption h5 {
+      color: white;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .gallery-caption p {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .footer {
+      background: linear-gradient(135deg, var(--primary-color), #34495e);
+      padding: 3rem 0;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.1);
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+
+    .gallery-filters {
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      border: none;
+      background: var(--light-bg);
+      padding: 0.5rem 1.5rem;
+      margin: 0 0.5rem;
+      border-radius: 25px;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--secondary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Modal styles for full-size image view */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 50px;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90vh;
+      margin: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .close {
+      position: absolute;
+      right: 35px;
+      top: 15px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Add padding to main content to prevent it from going under the fixed header */
+    main {
+      padding-top: 150px; /* Adjust this value based on your header height */
+    }
+
+    /* Add hover effect for the title */
+    h1.clickable-title {
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    h1.clickable-title:hover {
+      transform: translateY(-2px);
+      color: #ff6b6b !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- En-tête -->
+  <header class="bg-custom text-white py-4">
+    <div class="container">
+      <a href="index.html" style="text-decoration: none;">
+        <h1 style="color: #e74c3c;" class="text-center clickable-title">Check up Carrosserie</h1>
+      </a>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid justify-content-center">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="index.html">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="index.html#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="index.html#equipement">Équipement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="index.html#contact">Contact</a>
+            </li>
+            <li class="nav-divider"></li>
+            <li class="nav-item">
+              <a class="nav-link gallery-link active" href="gallery.html">Galerie</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <h2 class="section-title text-center">Nos Réalisations</h2>
+    
+    <div class="gallery-filters text-center">
+      <button class="filter-btn active" data-filter="atelier">Notre Atelier</button>
+      <button class="filter-btn" data-filter="avant-apres">Avant-Après</button>
+      <button class="filter-btn" data-filter="restauration">Restauration Classique</button>
+    </div>
+
+    <!-- Section Atelier -->
+    <div class="row gallery-section" id="atelier">
+      <div class="col-md-6 mb-4">
+        <div class="gallery-item">
+          <img src="img1.JPG" alt="Vue de l'atelier">
+          <div class="gallery-caption">
+            <h5>Notre Espace de Travail</h5>
+            <p>Zone principale de l'atelier</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="gallery-item">
+          <img src="img2.JPG" alt="Équipement de l'atelier">
+          <div class="gallery-caption">
+            <h5>Notre Four</h5>
+            <p>afin de faire secher la peinture en un temps record</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4" id="img5">
+        <div class="gallery-item">
+          <img src="img5.JPG" alt="Zone de peinture">
+          <div class="gallery-caption">
+            <h5>Cabine de Peinture</h5>
+            <p>Espace dédié aux finitions</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4" id="img4">
+        <div class="gallery-item">
+          <img src="img4.PNG" alt="Zone mécanique">
+          <div class="gallery-caption">
+            <h5>Zone Rangement</h5>
+            <p>Espace pour stocker les voitures prete, le materiel et les pieces</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Avant-Après -->
+    <div class="row gallery-section d-none" id="avant-apres">
+      <div class="col-12 mb-4">
+        <h3 class="text-center mb-4">Réparation Carrosserie</h3>
+      </div>
+      
+      <!-- Before Image -->
+      <div class="col-12 mb-4" id="avant">
+        <div class="gallery-item">
+          <img src="avant.PNG" alt="Avant réparation">
+          <div class="gallery-caption">
+            <h5>Avant Réparation</h5>
+            <p>État initial du véhicule</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Separator -->
+      <div class="col-12 text-center mb-4">
+        <h4 style="color: var(--secondary-color); position: relative;">
+          <span style="background: white; padding: 0 20px; position: relative; z-index: 1;">Après les Travaux</span>
+          <hr style="margin-top: -12px; border-color: var(--secondary-color);">
+        </h4>
+      </div>
+
+      <!-- After Images -->
+      <div class="row justify-content-center">
+        <div class="col-md-5 mb-4" id="apres1">
+          <div class="gallery-item">
+            <img src="apres1.PNG" alt="Après réparation">
+            <div class="gallery-caption">
+              <h5>Après Réparation</h5>
+              <p>Vue principale</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 mb-4" id="apres2">
+          <div class="gallery-item">
+            <img src="apres2.PNG" alt="Après réparation détail">
+            <div class="gallery-caption">
+              <h5>Détail Finition</h5>
+              <p>Vue rapprochée</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Restauration Classique -->
+    <div class="row gallery-section d-none" id="restauration">
+      <div class="col-12 mb-4">
+        <h3 class="text-center mb-4">Restauration Voiture Classique</h3>
+      </div>
+      <div class="col-md-6 mb-4" id="mini1av">
+        <div class="gallery-item">
+          <img src="mini1av.PNG" alt="Classique avant restauration">
+          <div class="gallery-caption">
+            <h5>Avant Restauration</h5>
+            <p>État initial de la voiture classique</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4" id="mini2av">
+        <div class="gallery-item">
+          <img src="mini2av.PNG" alt="Classique avant détails">
+          <div class="gallery-caption">
+            <h5>Avant Restauration</h5>
+            <p>État initial de la voiture classique</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-center mb-4">
+        <h4 style="color: var(--secondary-color); position: relative;">
+          <span style="background: white; padding: 0 20px; position: relative; z-index: 1;">Après les Travaux</span>
+          <hr style="margin-top: -12px; border-color: var(--secondary-color);">
+        </h4>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="gallery-item">
+          <img src="mini1.JPG" alt="Classique après restauration">
+          <div class="gallery-caption">
+            
+            <h5>Après Restauration</h5>
+            <p>l'avant de la fiat apres restauration</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="gallery-item">
+          <img src="mini2.JPG" alt="Classique après détails">
+          <div class="gallery-caption">
+            <h5>Après Restauration</h5>
+            <p>l'arriere de la fiat apres restauration</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Pied de page -->
+  <footer class="footer text-white">
+    <div class="container text-center">
+      <p>&copy; 2024 Check up Carrosserie - Tous droits réservés</p>
+      <div class="social-links mt-3">
+        <a href="https://www.facebook.com/share/12F6A1GydwA/?mibextid=wwXIfr" class="text-white" target="_blank">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.instagram.com/check_up_carosserie?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="text-white" target="_blank">
+          <i class="bi bi-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Add modal div at the end of body -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const sections = document.querySelectorAll('.gallery-section');
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const closeBtn = document.querySelector('.close');
+
+      // Filter buttons functionality
+      filterBtns.forEach(btn => {
+          btn.addEventListener('click', function() {
+              filterBtns.forEach(b => b.classList.remove('active'));
+              this.classList.add('active');
+              sections.forEach(section => section.classList.add('d-none'));
+              const targetSection = document.getElementById(this.getAttribute('data-filter'));
+              targetSection.classList.remove('d-none');
+          });
+      });
+
+      // Click to zoom functionality
+      document.querySelectorAll('.gallery-item img').forEach(img => {
+          img.addEventListener('click', function() {
+              modal.style.display = "flex";
+              modalImg.src = this.src;
+          });
+      });
+
+      // Close modal when clicking X
+      closeBtn.addEventListener('click', function() {
+          modal.style.display = "none";
+      });
+
+      // Close modal when clicking outside the image
+      modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+              modal.style.display = "none";
+          }
+      });
+  });
+  </script>
+</body>
+</html> 
